@@ -76,6 +76,8 @@ BEGIN_MESSAGE_MAP(CMFCNetClientDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON9, &CMFCNetClientDlg::OnBnClickedButton9)
 	ON_BN_CLICKED(IDC_BUTTON10, &CMFCNetClientDlg::OnBnClickedButton10)
 	ON_BN_CLICKED(IDC_BUTTON11, &CMFCNetClientDlg::OnBnClickedButton11)
+	ON_BN_CLICKED(IDC_BUTTON12, &CMFCNetClientDlg::OnBnClickedButton12)
+	ON_BN_CLICKED(IDC_BUTTON13, &CMFCNetClientDlg::OnBnClickedButton13)
 END_MESSAGE_MAP()
 
 
@@ -401,5 +403,66 @@ void CMFCNetClientDlg::OnBnClickedButton11()
 	else
 	{
 		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton12()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CColorDialog dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		COLORREF color = dlg.GetColor();
+		int r = GetRValue(color);
+		int g = GetGValue(color);
+		int b = GetBValue(color);
+
+		CString cmd;
+		cmd.Format(_T("SET_FILLCOLOR %d %d %d"), r, g, b);
+
+		// 2. 서버로 색상정보 전송 (아래는 이미 네트워크 통신 방식에 맞춤)
+		AfxSocketInit();
+		CSocket sock;
+		sock.Create();
+		if (sock.Connect(_T("127.0.0.1"), 9999))
+		{
+			CStringA cmdA(cmd);
+			sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+			sock.Close();
+			AfxMessageBox(_T("채우기 색상 명령 전송 완료!"));
+		}
+		else
+			AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton13()
+{
+	CColorDialog dlg;
+	if (dlg.DoModal() == IDOK)
+	{
+		COLORREF color = dlg.GetColor();
+		int r = GetRValue(color);
+		int g = GetGValue(color);
+		int b = GetBValue(color);
+
+		CString cmd;
+		cmd.Format(_T("SET_BORDERCOLOR %d %d %d"), r, g, b);
+
+		// 소켓으로 명령 전송
+		AfxSocketInit();
+		CSocket sock;
+		sock.Create();
+		if (sock.Connect(_T("127.0.0.1"), 9999))
+		{
+			CStringA cmdA(cmd);
+			sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+			sock.Close();
+			AfxMessageBox(_T("외곽선 색상 명령 전송 완료!"));
+		}
+		else
+		{
+			AfxMessageBox(_T("서버 연결 실패!"));
+		}
 	}
 }
