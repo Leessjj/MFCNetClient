@@ -180,9 +180,9 @@ void CMFCNetClientDlg::OnBnClickedButton1()
 		AfxSocketInit();
 		CSocket sock;
 		sock.Create();
-		if (sock.Connect(_T("127.0.0.1"), 9999))  // 서버 IP/포트 맞게
+		if (sock.Connect(_T("127.0.0.1"), 9999))  
 		{
-			CStringA cmdA(cmd); // 유니코드 → ANSI 변환
+			CStringA cmdA(cmd); 
 			sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
 
 			sock.Close();
@@ -198,27 +198,22 @@ void CMFCNetClientDlg::OnBnClickedButton1()
 void CMFCNetClientDlg::OnBnClickedButton2()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CFileDialog dlg(FALSE, _T("bmp"), NULL, OFN_OVERWRITEPROMPT, _T("이미지 파일|*.bmp;*.png;*.jpg;*.jpeg|모든 파일|*.*||"));
-	if (dlg.DoModal() == IDOK)
-	{
-		CString path = dlg.GetPathName();
-		CString cmd = _T("SAVEAS ") + path;
+	CString cmd = _T("SAVEAS");
 
-		// 서버로 명령 보내기
-		AfxSocketInit();
-		CSocket sock;
-		sock.Create();
-		if (sock.Connect(_T("127.0.0.1"), 9999))  // 서버 IP/포트 맞게
-		{
-			CStringA cmdA(cmd); // ANSI 변환
-			sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
-			sock.Close();
-			AfxMessageBox(_T("다른 이름으로 저장 명령 전송 완료!"));
-		}
-		else
-		{
-			AfxMessageBox(_T("서버 연결 실패!"));
-		}
+	// 서버로 명령 보내기
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd); // ANSI 변환
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("다른 이름으로 저장 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
 	}
 }
 void CMFCNetClientDlg::OnBnClickedButton3()
@@ -388,7 +383,7 @@ void CMFCNetClientDlg::OnBnClickedButton10()
 void CMFCNetClientDlg::OnBnClickedButton11()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	CString cmd = _T("SAVE_ALL");
+	CString cmd = _T("SAVE");
 
 	AfxSocketInit();
 	CSocket sock;
@@ -398,7 +393,7 @@ void CMFCNetClientDlg::OnBnClickedButton11()
 		CStringA cmdA(cmd);
 		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
 		sock.Close();
-		AfxMessageBox(_T("모두 저장 명령 전송 완료!"));
+		AfxMessageBox(_T("저장 명령 전송 완료!"));
 	}
 	else
 	{
