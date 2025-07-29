@@ -78,6 +78,13 @@ BEGIN_MESSAGE_MAP(CMFCNetClientDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON11, &CMFCNetClientDlg::OnBnClickedButton11)
 	ON_BN_CLICKED(IDC_BUTTON12, &CMFCNetClientDlg::OnBnClickedButton12)
 	ON_BN_CLICKED(IDC_BUTTON13, &CMFCNetClientDlg::OnBnClickedButton13)
+	ON_BN_CLICKED(IDC_BUTTON14, &CMFCNetClientDlg::OnBnClickedButton14)
+	ON_BN_CLICKED(IDC_BUTTON15, &CMFCNetClientDlg::OnBnClickedButton15)
+	ON_BN_CLICKED(IDC_BUTTON19, &CMFCNetClientDlg::OnBnClickedButton19)
+	ON_BN_CLICKED(IDC_BUTTON16, &CMFCNetClientDlg::OnBnClickedButton16)
+	ON_BN_CLICKED(IDC_BUTTON20, &CMFCNetClientDlg::OnBnClickedButton20)
+	ON_BN_CLICKED(IDC_BUTTON21, &CMFCNetClientDlg::OnBnClickedButton21)
+	ON_BN_CLICKED(IDC_BUTTON22, &CMFCNetClientDlg::OnBnClickedButton22)
 END_MESSAGE_MAP()
 
 
@@ -459,5 +466,152 @@ void CMFCNetClientDlg::OnBnClickedButton13()
 		{
 			AfxMessageBox(_T("서버 연결 실패!"));
 		}
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton14()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("GRAYSCALE");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("흑백 필터 적용 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+
+}
+
+void CMFCNetClientDlg::OnBnClickedButton15()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("BLUR");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("블러 필터 적용 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+void CMFCNetClientDlg::OnBnClickedButton16()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("Sobel");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("스케치 필터 적용 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton19()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("Sepia");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("세피아 톤 필터 적용 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton20()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("Defects");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("결함 검사 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton21()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("Noise");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("노이즈 검사 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton22()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("Stain");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("멍 검사 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
 	}
 }
