@@ -85,6 +85,7 @@ BEGIN_MESSAGE_MAP(CMFCNetClientDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON20, &CMFCNetClientDlg::OnBnClickedButton20)
 	ON_BN_CLICKED(IDC_BUTTON21, &CMFCNetClientDlg::OnBnClickedButton21)
 	ON_BN_CLICKED(IDC_BUTTON22, &CMFCNetClientDlg::OnBnClickedButton22)
+	ON_BN_CLICKED(IDC_BUTTON23, &CMFCNetClientDlg::OnBnClickedButton23)
 END_MESSAGE_MAP()
 
 
@@ -609,6 +610,27 @@ void CMFCNetClientDlg::OnBnClickedButton22()
 		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
 		sock.Close();
 		AfxMessageBox(_T("멍 검사 명령 전송 완료!"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패!"));
+	}
+}
+
+void CMFCNetClientDlg::OnBnClickedButton23()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CString cmd = _T("DRAW_FREE");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("펜 그리기 명령 전송 완료!"));
 	}
 	else
 	{
