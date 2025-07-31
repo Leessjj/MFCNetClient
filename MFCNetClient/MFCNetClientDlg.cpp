@@ -91,6 +91,8 @@ BEGIN_MESSAGE_MAP(CMFCNetClientDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON24, &CMFCNetClientDlg::OnBnClickedButton24)
 	ON_BN_CLICKED(IDC_BUTTON25, &CMFCNetClientDlg::OnBnClickedButton25)
 	ON_BN_CLICKED(IDC_BUTTON26, &CMFCNetClientDlg::OnBnClickedButton26)
+	ON_BN_CLICKED(IDC_BUTTON28, &CMFCNetClientDlg::OnBnClickedButton28)
+	ON_BN_CLICKED(IDC_BUTTON27, &CMFCNetClientDlg::OnBnClickedButton27)
 END_MESSAGE_MAP()
 
 
@@ -542,7 +544,44 @@ void CMFCNetClientDlg::OnBnClickedButton19()
 		AfxMessageBox(_T("서버 연결 실패"));
 	}
 }
+void CMFCNetClientDlg::OnBnClickedButton27()
+{
+	CString cmd = _T("Threshold");
 
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("이진화 필터 적용 명령 전송 완료"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패"));
+	}
+}
+void CMFCNetClientDlg::OnBnClickedButton28()
+{
+	CString cmd = _T("Mosaic");
+
+	AfxSocketInit();
+	CSocket sock;
+	sock.Create();
+	if (sock.Connect(_T("127.0.0.1"), 9999))
+	{
+		CStringA cmdA(cmd);
+		sock.Send(cmdA.GetBuffer(), cmdA.GetLength());
+		sock.Close();
+		AfxMessageBox(_T("모자이크 필터 적용 명령 전송 완료"));
+	}
+	else
+	{
+		AfxMessageBox(_T("서버 연결 실패"));
+	}
+}
 void CMFCNetClientDlg::OnBnClickedButton20()
 {
 	CString cmd = _T("Defects");
