@@ -683,7 +683,7 @@ void CMFCNetClientDlg::OnBnClickedButton17()
 }
 void CMFCNetClientDlg::OnBnClickedButton18()
 {
-	CString cmd = _T("DASHDOT");
+	CString cmd = _T("DASH");
 
 	AfxSocketInit();
 	CSocket sock;
